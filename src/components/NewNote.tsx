@@ -1,18 +1,20 @@
-import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { TextareaAutosize } from '@mui/base/TextareaAutosize'
-import { useState } from "react"
+import { newNote } from "../store/notesSlice/slice"
+import { useActions } from "../hooks/useActions"
 
 export function NewNote () {
 
-    const navigate = useNavigate()
-    const [ newNote, setNewNote ] = useState<{title: string, message: string}>({
-        title: '',
-        message: ''
-    })
+    const { dispatch } = useActions()
+    
+    const [ noteTitle , setNoteTitle ] = useState<string>('')
+    const [ noteMessage , setNoteMessage ] = useState<string>('')
 
     const handleDone = () => {
-        console.log(newNote);
+        
+        const createNote = { noteTitle, noteMessage }
+        dispatch(newNote(createNote))
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -20,10 +22,12 @@ export function NewNote () {
 
         const form = e.target as HTMLFormElement
         const fields = new FormData(form)
-        const title = fields.get('title') as string
-        const message = fields.get('message') as string
-         
-        setNewNote({ title , message })
+        const noteTitle = fields.get('title') as string
+        const noteMessage = fields.get('message') as string
+
+        const createNote = ({ noteTitle, noteMessage })
+        dispatch(newNote(createNote))
+
     }
 
     return (
@@ -53,7 +57,7 @@ export function NewNote () {
                 <form onSubmit={handleSubmit}>
                     <div  className="flex flex-col gap-2">
                         <input 
-                        
+                        onChange={(e) => setNoteTitle(e.target.value)}
                         type="text"
                         name="title" 
                         placeholder="Title"
@@ -61,6 +65,7 @@ export function NewNote () {
                         />
 
                         <TextareaAutosize
+                        onChange={(e) => setNoteMessage(e.target.value)}
                         name="message"
                         className="w-full box-border resize-none pr-4 min-h-[500px] placeholder:font-medium placeholder:text-lg placeholder:text-input-btn placeholder:opacity-50 text-xl dark:text-gray-100 bg-transparent outline-none"
                         aria-label="extarea"
