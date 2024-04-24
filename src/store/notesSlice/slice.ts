@@ -5,20 +5,30 @@ interface Note {
     noteMessage?: string
 }
 
+interface NonteWithId extends Note { 
+    id: `${string}-${string}-${string}-${string}-${string}`
+}
+
 const initialState: Note[] = (() => {
-    const persistedState = localStorage.getItem('redux-state')
-    return persistedState ? JSON.parse( persistedState ).users : []
+    const persistedState = localStorage.getItem('redux-state-notes')
+    return persistedState ? JSON.parse( persistedState ) : []
 })() // FUNCTION THAT CALLS ITSELF
+
+// const initialState: Note[] = []
 
 export const notesSlice = createSlice({
     name: 'notes',
     initialState,
     reducers: {
         newNote: (state, action: PayloadAction<Note>) => {
-            
-            const createNote = action.payload
+            const id = crypto.randomUUID()
+            const createNote:NonteWithId = { ...action.payload, id}
             state.push(createNote)            
-        }
+        },
+        // deleteNote: (state, action: PayloadAction<NonteWithId>) => {
+        //     const badNote = action.payload
+        //     return state.filter(note => note.id !== badNote.id)
+        // }
     }
 })
 

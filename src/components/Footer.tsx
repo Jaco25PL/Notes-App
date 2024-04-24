@@ -1,11 +1,15 @@
+import { useActions } from '../hooks/useActions'
 import { Link } from 'react-router-dom'
 
 export function Footer () {
 
+    const { noteState } = useActions()
+    const totalNotes = noteState.length
+
     return (
         <div>
             <div className="flex justify-center items-center relative px-5 h-14 dark:bg-dark-contrast  bg-gray-300 " >
-                <span className="text-sm font-semibold dark:text-gray-50 ">[n] Notes</span>
+                <span className="text-sm font-semibold dark:text-gray-50 ">{totalNotes} Notes</span>
                 <Link 
                 to={"/new"}
                 className="absolute right-5"

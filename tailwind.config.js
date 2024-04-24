@@ -16,32 +16,7 @@ export default {
       },
     },
   },
-  plugins: [
-    // function ({ addUtilities }) {
-      // const newUtilities = {
-        // ".scrollbar" : {
-  //         // scrollbarWidth : '0',
-          // scrollbarWidth : 'thin',
-          // scrollbarColor : '#fff'
-        // },
-  //       ".scrollbar-webkit": {
-  //         "&::-webkit-scrollbar" : {
-  //           // display : "none" 
-  //           with : '5px'
-  //         },
-  //         "&::-webkit-scrollbar-track" : {
-  //           scrollbarColor: '#023',
-  //           borderRadius : '6px'
-  //         },
-  //         "&::-webkit-scrollbar-thumb" : {
-  //           scrollbarColor: '#862',
-  //           borderRadius: '6px'
-  //         }
-  //       }
-      // }
-      // addUtilities(newUtilities)
-    // }
-  ],
+  plugins: [],
   darkMode: 'class'
 }
 

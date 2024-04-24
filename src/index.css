@@ -6,9 +6,9 @@
   @apply transition-colors duration-200
 }
 
-/* .textareSize {
-  filed-sizing: content
-} */
+html {
+  @apply bg-dark-bg 
+}
 
 @media (max-width: 750px) {
   ::-webkit-scrollbar {

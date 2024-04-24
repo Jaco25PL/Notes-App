@@ -1,5 +1,6 @@
 import { useState, useRef } from "react"
 import { DarkButton } from "./DarkButton"
+import { HomeNotes } from "./HomeNotes"
 import { Footer } from "./Footer"
 
 export function HomeView () {
@@ -27,7 +28,7 @@ export function HomeView () {
     }
  
     return (
-        <div className={`w-full flex flex-col justify-between min-h-dvh`}>
+        <div className={`w-full dark:bg-dark-bg bg-gray-50 flex flex-col justify-between min-h-dvh`}>
             <div>
                 <DarkButton />
                 <header className="mt-3 mx-5">
@@ -67,6 +68,8 @@ export function HomeView () {
                         </button>
                     </div>
                 </form>
+
+                <HomeNotes/>
             </div>
 
             <div>
