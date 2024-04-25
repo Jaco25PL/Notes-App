@@ -6,6 +6,7 @@ import displayReducer from './displaySlice/slice'
 const persistenceLSMiddleware: Middleware = store => next => action => {
     next(action)
     localStorage.setItem('redux-state-notes', JSON.stringify(store.getState().notes))
+    // localStorage.clear()
 } 
 
 

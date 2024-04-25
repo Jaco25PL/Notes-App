@@ -1,20 +1,10 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
+import type { Note, FullNote } from "../../types"
 
-interface Note {
-    noteTitle?: string
-    noteMessage?: string
-}
-
-interface NonteWithId extends Note { 
-    id: `${string}-${string}-${string}-${string}-${string}`
-}
-
-const initialState: Note[] = (() => {
+const initialState: FullNote[] = (() => {
     const persistedState = localStorage.getItem('redux-state-notes')
     return persistedState ? JSON.parse( persistedState ) : []
 })() // FUNCTION THAT CALLS ITSELF
-
-// const initialState: Note[] = []
 
 export const notesSlice = createSlice({
     name: 'notes',
@@ -22,17 +12,34 @@ export const notesSlice = createSlice({
     reducers: {
         newNote: (state, action: PayloadAction<Note>) => {
             const id = crypto.randomUUID()
-            const createNote:NonteWithId = { ...action.payload, id}
-            state.push(createNote)            
+            // const newDate = new Date()
+            //     const Y = parseInt(String(newDate.getFullYear()).slice(-2))
+            //     const D = newDate.getDate()
+            //     const M = newDate.getMonth() + 1
+            // const date: Date = {M, D, Y}
+
+            const createNote:FullNote = { ...action.payload, id}
+            state.push(createNote)
         },
-        // deleteNote: (state, action: PayloadAction<NonteWithId>) => {
-        //     const badNote = action.payload
-        //     return state.filter(note => note.id !== badNote.id)
-        // }
+        editNote: (state, action: PayloadAction<FullNote>) => {
+            const { id, date, noteTitle , noteMessage } = action.payload
+            const findNote = state.find(note => note.id === id)
+
+            if(findNote){
+                findNote.noteTitle = noteTitle,
+                findNote.noteMessage = noteMessage,
+                findNote.date = date
+            }            
+        },
+        deleteNote: (state, action: PayloadAction<FullNote>) => {
+
+            const id = action.payload
+            return state.filter(note => note.id !== id)
+        }
     }
 })
 
 
 export default notesSlice.reducer
 
-export const { newNote } = notesSlice.actions 
+export const { newNote, editNote, deleteNote } = notesSlice.actions 

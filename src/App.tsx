@@ -1,7 +1,8 @@
-import { NewNote } from "./components/NewNote"
+import { NoteEditor } from "./components/NoteEditor"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { HomeView } from "./components/HomeView"
+import { Home } from "./components/Home"
 import Layout from "./Layout"
+import { NoteEdit } from "./components/NoteEdit"
 
 export default function App () {
 
@@ -10,8 +11,9 @@ export default function App () {
         <BrowserRouter>
             <Layout>
                 <Routes>
-                    <Route path="/" element={<HomeView/>} />
-                    <Route path="/new" element={<NewNote/>}/>
+                    <Route path="/" element={<Home/>} />
+                    <Route path="/new" element={<NoteEditor/>}/>
+                    <Route path="/edit/:id" element={<NoteEdit/>}/>
                 </Routes>
             </Layout>
         </BrowserRouter>

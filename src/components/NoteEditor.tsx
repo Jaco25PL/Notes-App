@@ -1,20 +1,31 @@
-import { useState } from "react"
+import {  useState } from "react"
 import { Link } from "react-router-dom"
-import { TextareaAutosize } from '@mui/base/TextareaAutosize'
 import { newNote } from "../store/notesSlice/slice"
 import { useActions } from "../hooks/useActions"
+import { useNavigate } from "react-router-dom"
+import { NoteCreate } from "./NoteCreate"
+import { useUpdateDate } from "../hooks/useUpdateDate"
 
-export function NewNote () {
+export function NoteEditor () {
+
+    const navigate = useNavigate()
 
     const { dispatch } = useActions()
-    
+
     const [ noteTitle , setNoteTitle ] = useState<string>('')
     const [ noteMessage , setNoteMessage ] = useState<string>('')
 
+    const date = useUpdateDate()
+
     const handleDone = () => {
         
-        const createNote = { noteTitle, noteMessage }
+        const createNote = { noteTitle, noteMessage, date }
+        if(noteTitle.length === 0 && noteMessage.length === 0){
+            navigate('/')
+            return
+        }
         dispatch(newNote(createNote))
+        navigate('/')
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -25,13 +36,19 @@ export function NewNote () {
         const noteTitle = fields.get('title') as string
         const noteMessage = fields.get('message') as string
 
-        const createNote = ({ noteTitle, noteMessage })
-        dispatch(newNote(createNote))
+        const createNote = ({ noteTitle, noteMessage, date})
 
+        if(noteTitle.length === 0 && noteMessage.length === 0){
+            navigate('/')
+            return
+        }
+
+        dispatch(newNote(createNote))
+        navigate('/')
     }
 
     return (
-        <div>
+        <div className="dark:bg-dark-bg bg-gray-50 min-h-dvh">
             <header className="flex justify-between mx-4 mr-6 mt-2">
                 <Link to={'/'} className="flex items-center gap-1">
                     <div>
@@ -53,27 +70,8 @@ export function NewNote () {
                 </div>
             </header>
 
-            <main className="ml-7 mr-2 mt-10">
-                <form onSubmit={handleSubmit}>
-                    <div  className="flex flex-col gap-2">
-                        <input 
-                        onChange={(e) => setNoteTitle(e.target.value)}
-                        type="text"
-                        name="title" 
-                        placeholder="Title"
-                        className="placeholder:font-medium placeholder:text-3xl placeholder:text-input-btn placeholder:opacity-50 text-4xl font-bold dark:text-gray-100 bg-transparent outline-none whitespace-nowrap "
-                        />
-
-                        <TextareaAutosize
-                        onChange={(e) => setNoteMessage(e.target.value)}
-                        name="message"
-                        className="w-full box-border resize-none pr-4 min-h-[500px] placeholder:font-medium placeholder:text-lg placeholder:text-input-btn placeholder:opacity-50 text-xl dark:text-gray-100 bg-transparent outline-none"
-                        aria-label="extarea"
-                        placeholder="Message"
-                        />
-                    </div>
-                </form>
-            </main>
+            {/* <NoteEdit/> */}
+            <NoteCreate handleSubmit={handleSubmit} setNoteTitle={setNoteTitle} setNoteMessage={setNoteMessage} />
 
         </div>
     )
