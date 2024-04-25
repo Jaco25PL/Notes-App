@@ -1,15 +1,50 @@
 import { Link } from "react-router-dom"
+import { useEffect, useState, useMemo } from "react"
+import type { FullNote } from "../types"
 import { useActions } from "../hooks/useActions"
  
-export function NotesPreview () {
+type Props = {
+    isNote: string
+}
+
+function useDebounce (value: FullNote[] | false, delay: number) {
+	const [ debounceValue, setDebounceValue ] = useState( value )
+
+	useEffect(() => {
+		const timeoutId = setTimeout(() => {
+			setDebounceValue(value)
+		}, delay)
+		
+		return () => clearTimeout(timeoutId)
+	}, [value, delay])
+	
+	return debounceValue
+}
+
+export function NotesPreview ({ isNote }: Props ) {
 
     const { noteState } = useActions()
+    const [ show , setShow ] = useState<FullNote[]>(noteState)
+
+    const memoNote = useMemo(() => {
+        return isNote.length > 0 && noteState.filter(note => note.noteTitle?.includes(isNote))
+    }, [isNote, noteState])
+    
+    const debouncedNote = useDebounce(memoNote, 300)
+
+    useEffect(() => {
+        if(memoNote && debouncedNote) {
+            setShow(debouncedNote)
+        }else{
+            setShow(noteState)
+        }
+    }, [memoNote, noteState, debouncedNote])
 
     return (
-        <div className="px-5 my-3 w-full grid justify-items-center grid-cols-[repeat(auto-fill,minmax(100px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-4 sm:gap-8">
+        <div className="px-5 mb-3 w-full grid justify-items-center grid-cols-[repeat(auto-fill,minmax(100px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-4 sm:gap-8">
 
             {
-                noteState?.map(note => (
+                show?.map(note => (
                     <Link
                     to={`/edit/${note.id}`}
                     aria-label="edit note"

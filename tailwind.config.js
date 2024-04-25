@@ -6,6 +6,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      sans: ['"Poppins"', 'Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif']
+    },
     extend: {
       colors: {
         'yellow-btn': '#e4af0b',

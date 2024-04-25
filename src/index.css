@@ -3,11 +3,17 @@
 @tailwind utilities;
 
 * {
-  @apply transition-colors duration-200
+  @apply transition-all duration-200
 }
 
 html {
   @apply bg-dark-bg 
+}
+
+@layer base {
+  h1, h2, p {
+    @apply antialiased;
+  }
 }
 
 @media (max-width: 750px) {
@@ -38,9 +44,9 @@ html {
 
 
 :root {
-  font-family: "Poppins", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* font-family: "Poppins", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  /* line-height: 1.5; */
+  /* font-weight: 400; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

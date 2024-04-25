@@ -6,38 +6,43 @@ import { NotesPreview } from "./NotesPreview"
 export function Home () {
 
 
-    const [ isSearch , setIsSearch ] = useState(false)
+    const [ isSearch , setIsSearch ] = useState<boolean>(false)
+    const [ isNote , setIsNote ] = useState<string>('')
+
     const clearForm:React.MutableRefObject< HTMLFormElement | null> = useRef(null)
  
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.target.value ? setIsSearch(true) : setIsSearch(false)
+        const query = e.target.value
+        query ? setIsSearch(true) : setIsSearch(false)
+        setIsNote(query)
     }
-    const handleClearSearch = () => {
+    const handleClearSearch = (): void => {
         const form = clearForm.current
         if(form) {
             form.reset()
             setIsSearch(false)
+            setIsNote('')
         }
     }
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault()
+    //     const form = e.target as HTMLFormElement
+    //     const query = new FormData(form).get('search') as string
+    //     setIsNote(query) 
+    // }
 
-        // const field = new FormData(e.target)
-        
-    }
- 
     return (
         <div className={`w-full dark:bg-dark-bg bg-gray-50 flex flex-col justify-between min-h-dvh `}>
             <div>
-                <div>
+                <div className="sticky top-0 z-10 dark:bg-dark-bg bg-gray-50 pb-3">
                     <DarkButton />
                     <header className="mt-3 mx-5">
                         <h1 className="text-5xl font-bold dark:text-gray-50">Notes</h1>
                     </header>
         
                     <form 
-                    onSubmit={handleSubmit}
+                    // onSubmit={handleSubmit}
                     ref={clearForm}
                     >
                         <div className="mx-5 my-3 rounded-lg px-2 py-1 text-gray-300  flex justify-between items-center bg-gray-300 dark:bg-input-bg ">
@@ -72,13 +77,20 @@ export function Home () {
                 </div>
         
                 <main className="overflow-auto">
-                    <NotesPreview/>
+                    <NotesPreview isNote={isNote}/>
                 </main>
             </div>
 
-            <div>
+            <div className="sticky bottom-0 z-10">
                 <Footer/>
             </div>
+
+                    
+
+
+
         </div>
     )
 }
+
+
