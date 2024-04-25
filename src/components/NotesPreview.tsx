@@ -23,11 +23,11 @@ export function NotesPreview () {
                             <h2 className="leading-6 text-lg font-semibold break-words">
                                 {note.noteTitle && note.noteTitle.length > 15 ? note.noteTitle?.slice(0,15) + '...' : note.noteTitle}
                             </h2>
-                            <span className="text-sm font-medium">{note.date.D+'/'+note.date.M+'/'+note.date.Y}</span>
+                            <span className="text-sm font-medium">{note.date?.D+'/'+note.date?.M+'/'+note.date?.Y}</span>
                         </div>
                     </Link>
                 ))
-            } 
+            }
            
         </div>
     )

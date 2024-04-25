@@ -4,9 +4,8 @@ export const displaySlice = createSlice({
     name: 'display',
     initialState: true,
     reducers: {
-        displayMode: (state, action: PayloadAction< boolean >) => {
-            const value = action.payload
-            return state = value
+        displayMode: ( _, action: PayloadAction< boolean >) => {
+            return action.payload
         },
     }
 })
