@@ -53,7 +53,7 @@ export function NoteEdit () {
 
     return (
         <div className="dark:bg-dark-bg bg-gray-50 min-h-dvh">
-            <header className="flex justify-between mx-4 mr-6 mt-2">
+            <header className="sticky top-0 flex justify-between mx-4 mr-6 py-2 dark:bg-dark-bg dark:bg-opacity-70 dark:backdrop-blur-lg bg-gray-50 bg-opacity-50 backdrop-blur-md ">
                 <button
                 className="flex items-center gap-1"
                 type="submit"

@@ -49,7 +49,7 @@ export function NoteEditor () {
 
     return (
         <div className="dark:bg-dark-bg bg-gray-50 min-h-dvh">
-            <header className="flex justify-between mx-4 mr-6 mt-2">
+            <header className="flex justify-between sticky  top-0 mx-4 mr-6 dark:bg-dark-bg dark:bg-opacity-70 dark:backdrop-blur-lg bg-gray-50 bg-opacity-50 backdrop-blur-md   ">
                 <Link to={'/'} className="flex items-center gap-1">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="dark:text-yellow-btn w-7 h-7">
