@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 
 export function Footer () {
 
-    const { noteState } = useActions()
+    const { noteState , footerViewport } = useActions()
     const totalNotes = noteState.length
 
     return (
-        <div>
-            <div className="flex justify-center items-center relative px-5 h-14 dark:bg-dark-contrast  bg-gray-200 " >
+        <div >
+            <div  className={`${footerViewport ? 'dark:bg-dark-bg bg-gray-50' : 'dark:bg-dark-contrast dark:bg-opacity-50 bg-gray-300 bg-opacity-20'} flex justify-center items-center relative px-5 h-14   dark:backdrop-blur-lg  backdrop-blur-md`} >
                 <span className="text-sm font-semibold dark:text-gray-50 ">{totalNotes} Notes</span>
                 <Link 
                 to={"/new"}

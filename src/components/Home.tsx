@@ -1,10 +1,30 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { DarkButton } from "./DarkButton"
 import { Footer } from "./Footer"
 import { NotesPreview } from "./NotesPreview"
+import { useFooterView } from '../hooks/useFooterView'
+
 
 export function Home () {
 
+// CONTROL THE HEADER BEHAIVOR WHILE SCROLLING
+    const [ isScrolling, setIsScrolling ] = useState<boolean>(false)
+    const handleScroll = () => {
+        const scrollY: number = window.scrollY
+        scrollY && scrollY > 44 ? setIsScrolling(true) : setIsScrolling(false)
+    }
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+
+  
+// HANDLE FOOTER VIEW
+    const footerRef = useRef<HTMLDivElement>(null)
+    useFooterView({footerRef})
+
+
+//-----------------------------------------------------------------------------------------
 
     const [ isSearch , setIsSearch ] = useState<boolean>(false)
     const [ isNote , setIsNote ] = useState<string>('')
@@ -25,24 +45,17 @@ export function Home () {
         }
     }
 
-    // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault()
-    //     const form = e.target as HTMLFormElement
-    //     const query = new FormData(form).get('search') as string
-    //     setIsNote(query) 
-    // }
 
     return (
-        <div className={`w-full dark:bg-dark-bg bg-gray-50 flex flex-col justify-between min-h-dvh `}>
+        <div className={`dark:bg-dark-bg bg-gray-50 flex flex-col justify-between min-h-dvh `}>
             <div>
-                <div className="sticky top-0 z-10 dark:bg-dark-bg bg-gray-50 pb-3">
+                <div className="sticky -top-11 z-10 dark:bg-dark-bg bg-gray-50 pb-3">
                     <DarkButton />
-                    <header className="mt-3 mx-5">
-                        <h1 className="text-5xl font-bold dark:text-gray-50">Notes</h1>
+                    <header className={` mt-3 mx-5`}>
+                        <h1 className={`${isScrolling ? 'text-xl font-semibold' : ' text-4xl font-bold'} relative dark:text-gray-50 transition-all duration-600 ease-in-out`}>Notes</h1>
                     </header>
         
                     <form 
-                    // onSubmit={handleSubmit}
                     ref={clearForm}
                     >
                         <div className="mx-5 my-3 rounded-lg px-2 py-1 text-gray-300  flex justify-between items-center bg-gray-300 dark:bg-input-bg ">
@@ -78,11 +91,12 @@ export function Home () {
         
                 <main className="overflow-auto">
                     <NotesPreview isNote={isNote}/>
+                    <div ref={footerRef}></div>
                 </main>
             </div>
 
-            <div className="sticky bottom-0 z-10">
-                <Footer/>
+            <div  className="sticky bottom-0 z-10">
+                <Footer />
             </div>
 
                     

@@ -1,6 +1,7 @@
 import { configureStore, type Middleware } from "@reduxjs/toolkit"
 import notesReducer from './notesSlice/slice'
 import displayReducer from './displaySlice/slice'
+import footerViewportReducer from './footerViewportSlice/slice'
 
 
 const persistenceLSMiddleware: Middleware = store => next => action => {
@@ -13,7 +14,8 @@ const persistenceLSMiddleware: Middleware = store => next => action => {
 export const store = configureStore({
     reducer: {
         notes: notesReducer,
-        display: displayReducer
+        display: displayReducer,
+        footerViewport: footerViewportReducer 
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(persistenceLSMiddleware)
 }) 

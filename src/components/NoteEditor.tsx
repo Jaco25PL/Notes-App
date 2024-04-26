@@ -1,4 +1,4 @@
-import {  useState } from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { newNote } from "../store/notesSlice/slice"
 import { useActions } from "../hooks/useActions"
@@ -63,7 +63,7 @@ export function NoteEditor () {
                     <button
                     type="submit"
                     className="dark:text-yellow-btn font-semibold text-xl"
-                    onClick={handleDone}
+                     onClick={handleDone}
                     >
                         Done
                     </button>
