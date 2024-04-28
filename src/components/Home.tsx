@@ -49,7 +49,7 @@ export function Home () {
     return (
         <div className={`dark:bg-dark-bg bg-gray-50 flex flex-col justify-between min-h-dvh `}>
             <div>
-                <div className="sticky -top-11 z-10 dark:bg-dark-bg bg-gray-50 pb-3">
+                <div className="h-[150px] sticky -top-11 z-10 dark:bg-dark-bg bg-gray-50 ">
                     <DarkButton />
                     <header className={` mt-3 mx-5`}>
                         <h1 className={`${isScrolling ? 'text-xl font-semibold' : ' text-4xl font-bold'} relative dark:text-gray-50 transition-all duration-600 ease-in-out`}>Notes</h1>

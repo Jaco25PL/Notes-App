@@ -16,7 +16,7 @@ export const notesSlice = createSlice({
             //     const Y = parseInt(String(newDate.getFullYear()).slice(-2))
             //     const D = newDate.getDate()
             //     const M = newDate.getMonth() + 1
-            // const date: Date = {M, D, Y}
+            // const date: Date = {M, D, Y}a
 
             const createNote:FullNote = { ...action.payload, id}
             state.push(createNote)
