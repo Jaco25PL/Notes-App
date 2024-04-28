@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom"
 import { useActions } from "../hooks/useActions"
-import { TextareaAutosize } from "@mui/base"
+// import { TextareaAutosize } from "@mui/base"
 import { useState } from "react"
 import { editNote, deleteNote } from "../store/notesSlice/slice"
 import { useNavigate } from "react-router-dom"
 import type { Id } from "../types"
 import { useUpdateDate } from "../hooks/useUpdateDate"
+import { NotesInput } from "./NotesInput"
 
 export function NoteEdit () {
 
@@ -19,23 +20,11 @@ export function NoteEdit () {
     const matchedNote = noteState.filter(note => note.id === id) // note to edit
     const { noteTitle , noteMessage } = matchedNote[0]
 
-    const [ editTitle, setEditTitle ] = useState(noteTitle)
-    const [ editMessage, setEditMessage ] = useState(noteMessage)
+    const [ editTitle, setEditTitle ] = useState<string | undefined>(noteTitle)
+    const [ editMessage, setEditMessage ] = useState<string | undefined>(noteMessage)
 
     const handleDone = () => {
 
-        id && dispatch(editNote({
-            id: id,
-            noteTitle: editTitle,
-            noteMessage: editMessage,
-            date: date
-        }))
-        navigate('/')
-    }
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-
-        e.preventDefault()
         id && dispatch(editNote({
             id: id,
             noteTitle: editTitle,
@@ -81,29 +70,7 @@ export function NoteEdit () {
                 </div>
             </header>
 
-            <main className="ml-7 mr-2 mt-10 [&_*]:text-gray-800">
-                <form onSubmit={handleSubmit}>
-                    <div  className="flex flex-col gap-2">
-                        <input 
-                        onChange={(e) => setEditTitle(e.target.value)}
-                        type="text"
-                        name="title"
-                        value={editTitle}
-                        placeholder="Title"
-                        className="placeholder:font-medium placeholder:text-3xl placeholder:text-input-btn placeholder:opacity-50 text-3xl font-bold dark:text-gray-100 bg-transparent outline-none whitespace-nowrap "
-                        />
-
-                        <TextareaAutosize
-                        onChange={(e) => setEditMessage(e.target.value)}
-                        value={editMessage}
-                        name="message"
-                        className="w-full box-border resize-none pr-4 min-h-[500px] placeholder:font-medium placeholder:text-lg placeholder:text-input-btn placeholder:opacity-50 text-lg dark:text-gray-100 bg-transparent outline-none"
-                        aria-label="extarea"
-                        placeholder="Message"
-                        />
-                    </div>
-                </form>
-            </main>
+            <NotesInput setEditTitle={setEditTitle} editTitle={editTitle} setEditMessage={setEditMessage} editMessage={editMessage}  />
 
         </div>
     )

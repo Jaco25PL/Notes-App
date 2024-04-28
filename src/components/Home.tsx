@@ -1,28 +1,19 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
 import { DarkButton } from "./DarkButton"
 import { Footer } from "./Footer"
 import { NotesPreview } from "./NotesPreview"
 import { useFooterView } from '../hooks/useFooterView'
+import { useHeaderHomeScroll } from "../hooks/useHeaderHomeScroll"
 
 
 export function Home () {
 
-// CONTROL THE HEADER BEHAIVOR WHILE SCROLLING
-    const [ isScrolling, setIsScrolling ] = useState<boolean>(false)
-    const handleScroll = () => {
-        const scrollY: number = window.scrollY
-        scrollY && scrollY > 44 ? setIsScrolling(true) : setIsScrolling(false)
-    }
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
-
+// (HOOK) CONTROL THE HEADER BEHAIVOR WHILE SCROLLING
+    const { isScrolling , isScrollingDarkBtn } = useHeaderHomeScroll()
   
-// HANDLE FOOTER VIEW
+// (HOOK) HANDLE FOOTER VIEW
     const footerRef = useRef<HTMLDivElement>(null)
     useFooterView({footerRef})
-
 
 //-----------------------------------------------------------------------------------------
 
@@ -50,12 +41,15 @@ export function Home () {
         <div className={`dark:bg-dark-bg bg-gray-50 flex flex-col justify-between min-h-dvh `}>
             <div>
                 <div className="h-[150px] sticky -top-11 z-10 dark:bg-dark-bg bg-gray-50 ">
-                    <DarkButton />
-                    <header className={` mt-3 mx-5`}>
-                        <h1 className={`${isScrolling ? 'text-xl font-semibold' : ' text-4xl font-bold'} relative dark:text-gray-50 transition-all duration-600 ease-in-out`}>Notes</h1>
+                    <div className={`${isScrollingDarkBtn ? 'opacity-0' : 'opacity-100'}`}>
+                        <DarkButton />
+                    </div>
+                    <header className={` mt-3 mx-5 w-full bg-opacity-50 `}>
+                        <h1 className={`${isScrolling ? 'text-xl font-semibold left-[calc(50%-1.83rem)]' : 'left-5 text-4xl font-bold'}  absolute dark:text-gray-50 transition-all duration-600 ease-in-out`}>Notes</h1>
                     </header>
         
                     <form 
+                    className="absolute bottom-0 w-full"
                     ref={clearForm}
                     >
                         <div className="mx-5 my-3 rounded-lg px-2 py-1 text-gray-300  flex justify-between items-center bg-gray-300 dark:bg-input-bg ">
@@ -73,7 +67,7 @@ export function Home () {
                             placeholder="Search" 
                             name="search"
                             autoComplete="off"
-                            className="w-full dark:text-input-btn text-gray-500 bg-transparent placeholder:text-lg text-lg focus:outline-none"
+                            className="w-full dark:text-input-btn text-gray-500 bg-transparent placeholder:text-lg text-lg focus:outline-none outline-none"
                             />
     
                             <button 

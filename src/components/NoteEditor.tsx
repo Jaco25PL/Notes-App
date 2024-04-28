@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 import { newNote } from "../store/notesSlice/slice"
 import { useActions } from "../hooks/useActions"
 import { useNavigate } from "react-router-dom"
-import { NoteCreate } from "./NoteCreate"
 import { useUpdateDate } from "../hooks/useUpdateDate"
+import { NotesInput } from "./NotesInput"
 
 export function NoteEditor () {
 
@@ -24,25 +24,6 @@ export function NoteEditor () {
             navigate('/')
             return
         }
-        dispatch(newNote(createNote))
-        navigate('/')
-    }
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-
-        const form = e.target as HTMLFormElement
-        const fields = new FormData(form)
-        const noteTitle = fields.get('title') as string
-        const noteMessage = fields.get('message') as string
-
-        const createNote = ({ noteTitle, noteMessage, date})
-
-        if(noteTitle.length === 0 && noteMessage.length === 0){
-            navigate('/')
-            return
-        }
-
         dispatch(newNote(createNote))
         navigate('/')
     }
@@ -70,8 +51,7 @@ export function NoteEditor () {
                 </div>
             </header>
 
-            {/* <NoteEdit/> */}
-            <NoteCreate handleSubmit={handleSubmit} setNoteTitle={setNoteTitle} setNoteMessage={setNoteMessage} />
+            <NotesInput setEditTitle={setNoteTitle} editTitle={noteTitle} setEditMessage={setNoteMessage} editMessage={noteMessage}  />
 
         </div>
     )
