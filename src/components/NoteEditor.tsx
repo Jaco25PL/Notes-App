@@ -18,7 +18,6 @@ export function NoteEditor () {
     const date = useUpdateDate()
 
     const handleDone = () => {
-        
         const createNote = { noteTitle, noteMessage, date }
         if(noteTitle.length === 0 && noteMessage.length === 0){
             navigate('/')
@@ -52,7 +51,6 @@ export function NoteEditor () {
             </header>
 
             <NotesInput setEditTitle={setNoteTitle} editTitle={noteTitle} setEditMessage={setNoteMessage} editMessage={noteMessage}  />
-
         </div>
     )
 }

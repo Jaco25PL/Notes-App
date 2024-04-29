@@ -71,7 +71,6 @@ export function NoteEdit () {
             </header>
 
             <NotesInput setEditTitle={setEditTitle} editTitle={editTitle} setEditMessage={setEditMessage} editMessage={editMessage}  />
-
         </div>
     )
 }
