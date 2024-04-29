@@ -40,12 +40,12 @@ export function Home () {
     return (
         <div className={`dark:bg-dark-bg bg-gray-50 flex flex-col justify-between min-h-dvh `}>
             <div>
-                <div className="h-[150px] sticky -top-11 z-10 dark:bg-dark-bg bg-gray-50 ">
+                <div className="h-[150px] sticky top-0 z-10 dark:bg-dark-bg bg-gray-50 ">
                     <div className={`${isScrollingDarkBtn ? 'opacity-0' : 'opacity-100'}`}>
                         <DarkButton />
                     </div>
-                    <header className={` mt-3 mx-5 w-full bg-opacity-50 `}>
-                        <h1 className={`${isScrolling ? 'text-xl font-semibold left-[calc(50%-1.83rem)]' : 'left-5 text-4xl font-bold'}  absolute dark:text-gray-50 transition-all duration-600 ease-in-out`}>Notes</h1>
+                    <header className={` mt-3 mx-5 `}>
+                        <h1 className={`${isScrolling ? 'text-xl font-semibold ' : ' text-4xl font-bold'} dark:text-gray-50 transition-all duration-600 ease-in-out`}>Notes</h1>
                     </header>
         
                     <form 
