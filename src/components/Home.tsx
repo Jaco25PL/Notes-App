@@ -40,19 +40,19 @@ export function Home () {
     return (
         <div className={`dark:bg-dark-bg bg-gray-50 flex flex-col justify-between min-h-dvh `}>
             <div>
-                <div className="h-[150px] sticky top-0 z-10 dark:bg-dark-bg bg-gray-50 ">
+                <div className="h-[150px] sticky -top-10 z-10  dark:bg-dark-bg  bg-gray-50 ">
                     <div className={`${isScrollingDarkBtn ? 'opacity-0' : 'opacity-100'}`}>
                         <DarkButton />
                     </div>
-                    <header className={` mt-3 mx-5 `}>
-                        <h1 className={`${isScrolling ? 'text-xl font-semibold ' : ' text-4xl font-bold'} dark:text-gray-50 transition-all duration-600 ease-in-out`}>Notes</h1>
+                    <header className={` mt-3 mx-5 relative`}>
+                        <h1 className={`${isScrolling ? ' scale-100  translate-x-[calc(100%+105px)]' : 'translate-x-6 scale-[2] '} transform font-bold absolute top-0     dark:text-gray-50 transition-all `}>Notes</h1>
                     </header>
         
                     <form 
-                    className="absolute bottom-0 w-full"
+                    className=" absolute bottom-4 w-full"
                     ref={clearForm}
                     >
-                        <div className="mx-5 my-3 rounded-lg px-2 py-1 text-gray-300  flex justify-between items-center bg-gray-300 dark:bg-input-bg ">
+                        <div className="mx-5 rounded-lg px-2 py-1 text-gray-300  flex justify-between items-center bg-gray-300 dark:bg-input-bg ">
                             <div className="mr-2">
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5 text-gray-500 dark:text-input-btn">

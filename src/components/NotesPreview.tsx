@@ -30,7 +30,7 @@ export function NotesPreview ({ isNote }: Props ) {
     }, [memoNote, noteState, debounceValue])
 
     return (
-        <div className=" px-5 mb-3 pt-2 w-full grid justify-items-center grid-cols-[repeat(auto-fill,minmax(100px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-4 sm:gap-8">
+        <div className=" px-5 mb-3 pt-5 w-full grid justify-items-center grid-cols-[repeat(auto-fill,minmax(100px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-4 sm:gap-8">
 
             {
                 show?.map(note => (
