@@ -1,40 +1,44 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Link } from "react-router-dom"
-import { useEffect, useState, useMemo } from "react"
-import type { FullNote } from "../types"
+import { useMemo, useCallback } from "react"
+import type { FullNoteRender, FullNote } from "../types"
 import { useActions } from "../hooks/useActions"
 import { useDebounce } from "../hooks/useDebounce"
+import { useUpdateDate } from "../hooks/useUpdateDate"
 
 type Props = {
     isNote: string
 }
 
-
-
 export function NotesPreview ({ isNote }: Props ) {
 
     const { noteState } = useActions()
-    const [ show , setShow ] = useState<FullNote[]>(noteState)
+
+    const mapNoteState = useCallback(
+        (state: FullNote[]): FullNoteRender[] =>
+            state.map((item) => {
+                const itemDate = `${item.date?.M}/${item.date?.D}/${item.date?.Y}`
+                return { ...item, date: itemDate }
+            }),[]
+    )
+    
+    const mappedState = mapNoteState(noteState)
+
 
     const memoNote = useMemo(() => {
-        return isNote.length > 0 ? noteState.filter(note => note.noteTitle?.toLocaleLowerCase()?.includes(isNote.toLocaleLowerCase())) : noteState
-    }, [isNote, noteState])
+        return isNote.length > 0 ? mappedState.filter(note => note.noteTitle?.toLocaleLowerCase()?.includes(isNote.toLocaleLowerCase())) : mappedState
+    }, [isNote])
     
-    const  debounceValue = useDebounce(memoNote, 300)
+    const debouncedNote = useDebounce(memoNote, 300)
+    const sortedNotes = debouncedNote.sort((a, b) => a.date.localeCompare(b.date) )
 
-    useEffect(() => {
-        if(memoNote && debounceValue) {
-            setShow(debounceValue)
-        }else{
-            setShow(noteState)
-        }
-    }, [memoNote, noteState, debounceValue])
+    const date = useUpdateDate()
+    const dateValue = Object.values(date).join('/')
 
     return (
-        <div className=" px-5 mb-3 pt-5 w-full grid justify-items-center grid-cols-[repeat(auto-fill,minmax(100px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-4 sm:gap-8">
-
+        <div className=" px-5 mb-3 pt-2 w-full grid justify-items-center grid-cols-[repeat(auto-fill,minmax(100px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-4 sm:gap-8">
             {
-                show?.map(note => (
-
+                sortedNotes?.map(note => (
                     <Link
                     to={`/edit/${note.id}`}
                     aria-label="edit note"
@@ -48,7 +52,11 @@ export function NotesPreview ({ isNote }: Props ) {
                             <h2 className=" leading-6 text-lg font-semibold break-words">
                                 {note.noteTitle && note.noteTitle.length > 16 ? note.noteTitle?.slice(0,13) + '...' : note.noteTitle}
                             </h2>
-                            <span className="text-sm font-medium">{note.date?.D+'/'+note.date?.M+'/'+note.date?.Y}</span>
+                            <span className="text-sm font-medium">{
+
+                                dateValue === note.date ? 'Today' : note.date
+
+                            }</span>
                         </div>
                     </Link>
                 ))

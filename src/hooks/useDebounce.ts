@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
-import type { FullNote } from "../types"
+import type { FullNoteRender } from "../types"
 
-export function useDebounce (value: FullNote[] , delay: number): FullNote[] {
-	const [ debounceValue, setDebounceValue ] = useState<FullNote[]>( value )
+export function useDebounce (value: FullNoteRender[] , delay: number): FullNoteRender[] {
+	const [ debouncedNote, setDebouncedNote ] = useState<FullNoteRender[]>( value )
 
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {
-			setDebounceValue(value)
+			setDebouncedNote(value)
 		}, delay)
 		
 		return () => clearTimeout(timeoutId)
 	}, [value, delay])
 	
-	return debounceValue
+	return debouncedNote
 }

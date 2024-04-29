@@ -23,3 +23,8 @@ export interface FullNote extends Note {
     id: Id.id
     date?: Date
 }
+
+export interface FullNoteRender extends Note {
+    id: Id.id
+    date: string
+}
