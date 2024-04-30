@@ -36,7 +36,7 @@ export function NotesPreview ({ isNote }: Props ) {
     return (
 
         <div>
-            <span className="text-gray-50 pl-6 font-semibold text-xl">Recent</span>
+            { sortedNotes.length > 0 ? <span className="dark:text-yellow-btn text-violet-900 pl-6 font-semibold text-xl">Recent</span> : ''}
             
             <div className=" px-5 mb-3 pt-2 w-full grid justify-items-center grid-cols-[repeat(auto-fill,minmax(100px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-4 sm:gap-8">
                 {

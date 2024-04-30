@@ -15,7 +15,7 @@ export function Home () {
     const footerRef = useRef<HTMLDivElement>(null)
     useFooterView({footerRef})
 
-//-----------------------------------------------------------------------------------------
+// HANDLE SEARCH
 
     const [ isSearch , setIsSearch ] = useState<boolean>(false)
     const [ isNote , setIsNote ] = useState<string>('')
@@ -40,7 +40,7 @@ export function Home () {
     return (
         <div className={`dark:bg-dark-bg bg-gray-50 flex flex-col justify-between min-h-dvh `}>
             <div>
-                <div className="h-[150px] sticky -top-10 z-10  dark:bg-dark-bg  bg-gray-50 ">
+                <div className="h-[150px] sticky -top-10 z-10  dark:bg-dark-bg dark:bg-opacity-50 dark:backdrop-blur-lg bg-opacity-50 backdrop-blur-md  bg-gray-50 ">
                     <div className={`${isScrollingDarkBtn ? 'opacity-0' : 'opacity-100'}`}>
                         <DarkButton />
                     </div>
@@ -52,7 +52,7 @@ export function Home () {
                     className=" absolute bottom-4 w-full"
                     ref={clearForm}
                     >
-                        <div className="mx-5 rounded-lg px-2 py-1 text-gray-300  flex justify-between items-center bg-gray-300 dark:bg-input-bg ">
+                        <div className="mx-5 rounded-lg px-2 py-1 text-gray-300  flex justify-between items-center bg-[#bbb] bg-opacity-50 dark:bg-[#333] dark:bg-opacity-50 ">
                             <div className="mr-2">
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-5 h-5 text-gray-500 dark:text-input-btn">
@@ -67,7 +67,7 @@ export function Home () {
                             placeholder="Search" 
                             name="search"
                             autoComplete="off"
-                            className="w-full dark:text-input-btn text-gray-500 bg-transparent placeholder:text-lg text-lg focus:outline-none outline-none"
+                            className="w-full dark:text-input-btn text-gray-500 bg-transparent placeholder:text-input-btn  placeholder:text-lg text-lg focus:outline-none outline-none"
                             />
     
                             <button 
