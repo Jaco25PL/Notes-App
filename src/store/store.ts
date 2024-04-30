@@ -5,6 +5,7 @@ import footerViewportReducer from './footerViewportSlice/slice'
 
 
 const persistenceLSMiddleware: Middleware = store => next => action => {
+    
     next(action)
     localStorage.setItem('redux-state-notes', JSON.stringify(store.getState().notes))
     // localStorage.clear()

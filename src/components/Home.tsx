@@ -93,10 +93,6 @@ export function Home () {
                 <Footer />
             </div>
 
-                    
-
-
-
         </div>
     )
 }
