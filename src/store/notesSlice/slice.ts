@@ -12,12 +12,6 @@ export const notesSlice = createSlice({
     reducers: {
         newNote: (state, action: PayloadAction<Note>) => {
             const id = crypto.randomUUID()
-            // const newDate = new Date()
-            //     const Y = parseInt(String(newDate.getFullYear()).slice(-2))
-            //     const D = newDate.getDate()
-            //     const M = newDate.getMonth() + 1
-            // const date: Date = {M, D, Y}a
-
             const createNote:FullNote = { ...action.payload, id}
             state.push(createNote)
         },
@@ -32,7 +26,6 @@ export const notesSlice = createSlice({
             }            
         },
         deleteNote: (state, action: PayloadAction<FullNote>) => {
-
             const id = action.payload
             return state.filter(note => note.id !== id)
         }

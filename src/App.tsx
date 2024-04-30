@@ -1,4 +1,4 @@
-import { NoteEditor } from "./components/NoteEditor"
+import { NoteCreate } from "./components/NoteCreate"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Home } from "./components/Home"
 import Layout from "./Layout"
@@ -12,7 +12,7 @@ export default function App () {
             <Layout>
                 <Routes>
                     <Route path="/" element={<Home/>} />
-                    <Route path="/new" element={<NoteEditor/>}/>
+                    <Route path="/new" element={<NoteCreate/>}/>
                     <Route path="/edit/:id" element={<NoteEdit/>}/>
                 </Routes>
             </Layout>

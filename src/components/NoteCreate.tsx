@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 import { useUpdateDate } from "../hooks/useUpdateDate"
 import { NotesInput } from "./NotesInput"
 
-export function NoteEditor () {
+export function NoteCreate () {
 
     const navigate = useNavigate()
 

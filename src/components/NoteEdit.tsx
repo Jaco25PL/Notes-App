@@ -8,6 +8,7 @@ import type { Id } from "../types"
 import { useUpdateDate } from "../hooks/useUpdateDate"
 import { NotesInput } from "./NotesInput"
 
+
 export function NoteEdit () {
 
     const navigate = useNavigate()
@@ -24,7 +25,6 @@ export function NoteEdit () {
     const [ editMessage, setEditMessage ] = useState<string | undefined>(noteMessage)
 
     const handleDone = () => {
-
         id && dispatch(editNote({
             id: id,
             noteTitle: editTitle,
