@@ -1,16 +1,13 @@
+import { useNavigate } from "react-router-dom"
 import { useParams } from "react-router-dom"
+import type { Id } from "../types"
 import { useActions } from "../hooks/useActions"
-// import { TextareaAutosize } from "@mui/base"
+import { useUpdateDate } from "../hooks/useUpdateDate"
 import { useState } from "react"
 import { editNote, deleteNote } from "../store/notesSlice/slice"
-import { useNavigate } from "react-router-dom"
-import type { Id } from "../types"
-import { useUpdateDate } from "../hooks/useUpdateDate"
 import { NotesInput } from "./NotesInput"
 
-
 export function NoteEdit () {
-
     const navigate = useNavigate()
 
     const { id } = useParams<Id>()

@@ -36,7 +36,6 @@ export function Home () {
         }
     }
 
-
     return (
         <div className={`dark:bg-dark-bg bg-gray-50 flex flex-col justify-between min-h-dvh `}>
             <div>
@@ -92,7 +91,6 @@ export function Home () {
             <div  className="sticky bottom-0 z-10">
                 <Footer />
             </div>
-
         </div>
     )
 }

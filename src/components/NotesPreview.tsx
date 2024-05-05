@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Link } from "react-router-dom"
-import { useMemo, useCallback } from "react"
-import type { FullNoteRender, FullNote } from "../types"
 import { useActions } from "../hooks/useActions"
+import type { FullNoteRender, FullNote } from "../types"
+import { useMemo, useCallback } from "react"
 import { useDebounce } from "../hooks/useDebounce"
 import { useUpdateDate } from "../hooks/useUpdateDate"
+import { Link } from "react-router-dom"
 
 type Props = {
     isNote: string

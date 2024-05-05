@@ -1,11 +1,10 @@
-import { NoteCreate } from "./components/NoteCreate"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Home } from "./components/Home"
 import Layout from "./Layout"
+import { Home } from "./components/Home"
+import { NoteCreate } from "./components/NoteCreate"
 import { NoteEdit } from "./components/NoteEdit"
 
 export default function App () {
-
 
     return(
         <BrowserRouter>

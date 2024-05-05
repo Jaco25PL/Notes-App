@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
 import type { FullNoteRender } from "../types"
+import { useEffect, useState } from "react"
 
 export function useDebounce (value: FullNoteRender[] , delay: number): FullNoteRender[] {
 	const [ debouncedNote, setDebouncedNote ] = useState<FullNoteRender[]>( value )
